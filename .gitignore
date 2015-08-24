@@ -43,3 +43,6 @@ venv
 
 # vim swap files
 *.swp
+
+# mac secret file
+*.DS_Store
