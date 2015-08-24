@@ -24,15 +24,19 @@
 	</div>
 	<div id="right_div">
 		<img src="{{ url_for('static', filename='business_card.png') }}" id="card">
-      {{ wtf.quick_form(form)}}
+      <div class="form-group   required">
+          <label class="control-label" for="url">Please input URL for pictures</label>
+          <input id="url" class="form-control" name="url" required type="text" value>
+      </div>
+      <input id="submit" class="btn btn-default" type="submit" name="submit" value="Submit">
 	    <br>
     <div id="result_all">
 	    <div id="result_text">Result:</div>
       <br>
       <br>
-	    <div id="result">{{ result }}</div>
+	    <div id="result"></div>
     </div>
 	</div>
-	<div id="thumbnail"><img id="img_thumbnail" src="{{ url }}" alt="image for search" /></div>
+	<div id="thumbnail"><img id="img_thumbnail" src=# alt="image for search" /></div>
 </div>
 {% endblock %}
