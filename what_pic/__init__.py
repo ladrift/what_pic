@@ -3,9 +3,11 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from config import config
 
+
 # initiate plugins
 
 bootstrap = Bootstrap()
+
 
 def create_app(config_name):
     """create a app under specified configuration.

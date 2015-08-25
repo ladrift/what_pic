@@ -7,7 +7,6 @@
 <link rel="short icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" href="{{ url_for('static', filename='mycss.css') }}" media="screen" title="no title" charset="utf-8">
-<script type="text/javascript" src="{{ url_for('static',filename='myjs.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -35,4 +34,9 @@
 <div class="container">
   {% block page_content %}{% endblock %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ url_for('static',filename='myjs.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='ws.js') }}"></script>
 {% endblock %}
