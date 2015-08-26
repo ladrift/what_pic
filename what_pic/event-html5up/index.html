@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<!--
+	Eventually by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>What The Pic Is</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	    <link rel="shortcut icon" href="favicon.ico">
+	</head>
+	<body>
+	
+        	<img src="business_card.png" id="card">
+		<!-- Header -->
+			<header id="header">
+				<h1>How to Play</h1>
+				<p>You can UPLOAD your picture or submit the url which is end with .jpg .jpeg .png and etc,then we will tell the picture and tell you what the picture is.</p>
+				<p>You have two ways:</p>
+				<ul>
+					<li>upload your own picture in your own file</li>
+					<li>submit the <em>url</em> of the picture which on the Internet</li>
+				</ul>
+                <ul id="ps_alert">※&nbsp &nbsp Ps:we will NOT keep your photo.</ul>
+			</header>
+
+            <div id="upload" onclick="scan_the_pic.click()" style="cursor:pointer">
+            	<p id="word">
+            		<strong id="click_here">Click Here</strong>
+            		<p id="add_url">
+            		or add URL below
+            		</p>
+            		<p id="arrow">↓↓↓↓</p>
+            	</p>
+            </div>
+
+		<!-- Signup Form -->
+			<form id="signup-form" method="post" action="#">
+				
+					<input type="text" name="sub_url" id="the_url" placeholder="Add URL" />
+					<input type="submit" value="Submit" id="submit_url" />
+				
+			</form>
+            <form method="post" action="http://localhost/" enctype="multipart/form-data" style="display:none;">
+			        <input id="scan_the_pic" type="button" value="Upload Your Picture" onclick="submit_the_pic.click()" style="display:none;"/>
+			        <input type="file" id="submit_the_pic" onchange="event_happen()" name="f" style="filter:alpha(opacity=0); opacity:0; width:30px; display:none;" size="1" />
+			</form>
+
+			<div id="result">
+             	<div id="result_text"><h3>result:</h3></div>
+                <div id="show_result"></div>
+			<div>
+            
+            <div id="below"></div>
+
+
+		<!-- Footer -->
+		
+			<footer id="footer">
+				<ul class="icons">
+					<!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+					<!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
+					<li><a href="https://github.com/ladrift/what_pic" class="icon fa-github"><span class="label">GitHub</span></a></li>
+					<li><a href="" class="icon fa-wechat"><span class="label">wechat</span></a></li>
+				</ul>
+				<!-- <ul class="copyright">
+					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul> -->
+			</footer>
+		<!-- Scripts -->
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+            <script type="text/javascript" src="myjs.js"></script>
+	</body>
+</html>
