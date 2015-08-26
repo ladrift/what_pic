@@ -1,46 +1,90 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+<!DOCTYPE HTML>
+<!--
+    Eventually by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+    <head>
+        <title>What The Pic Is</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body>
 
-{% block title %}What the Pic is{% endblock %}
+        <img src="{{ url_for('static', filename='business_card.png') }}" id="card">
+        <!-- Header -->
+        <header id="header">
+            <h1>How to Play</h1>
+            <p>You can UPLOAD your picture or submit the url which is end with .jpg .jpeg .png and etc,then we will tell the picture and tell you what the picture is.</p>
+            <p>You have two ways:</p>
+            <ul>
+                <li>upload your own picture in your own file</li>
+                <li>submit the <em>url</em> of the picture which on the Internet</li>
+            </ul>
+            <ul id="ps_alert">※&nbsp &nbsp Ps:we will NOT keep your photo.</ul>
+        </header>
 
-{% block page_content %}
-<div id="the_all">
-	<div id="left_div">
-		<p> <span>功</span>能：你在url框内输入一张图片在网络上的地址，以类似.jpg.png等结尾的地址。<p>
-		<p>例如：http://a.
-			hiphotos.baidu
-			.com/baike/
-			c0%3Dbaike116%2C
-			5%2C5%2C11
-			6%2C38/
-		sign=5db91b1ad73
-		9b60059c307e5883
-		95e4f/77094b36ac
-		af2eddebbb51108f1
-		001e938019384<em>.jpg</em>
-         （额，这是楪祈的照片。）</p>
-          <p>放进去点击submit就可以在result后得到对于图片内容的陈述.</p>
-          <p>当然现在的0.1版本只能上传图片地址，不过会很快迭代更新(*/ω＼*)</p>
-	</div>
-	<div id="right_div">
-		<img src="{{ url_for('static', filename='business_card.png') }}" id="card">
-        <form id=uploadform method=post enctype=multipart/form-data>
-            <input id=image type="file" name=file onchange=" handle_files(this.files); ">
-            <button id="upload" type="button">Upload</button>
+        <div id="upload" onclick="image.click()" style="cursor:pointer">
+            <p id="word">
+            <strong id="click_here">Click Here</strong>
+            <p id="add_url">
+            or add URL below
+            </p>
+            <p id="arrow">↓↓↓↓</p>
+            </p>
+        </div>
+
+        <!-- Signup Form -->
+        <form id="signup-form" method="post" action="#">
+
+            <input type="text" name="sub_url" id="the_url" placeholder="Add URL" />
+            <input type="submit" value="Submit" id="submit_url" />
+
         </form>
-      <div class="form-group   required">
-          <label class="control-label" for="url">Please input URL for pictures</label>
-          <input id="url" required type="text">
-      </div>
-      <input id="submit" class="btn btn-default" type="submit" name="submit" value="Submit">
-	    <br>
-    <div id="result_all">
-	    <div id="result_text">Result:</div>
-      <br>
-      <br>
-	    <div id="result"></div>
-    </div>
-	</div>
-	<div id="thumbnail"><img id="img_thumbnail" src=""/></div>
-</div>
-{% endblock %}
+        <form id=uploadform method="post" enctype="multipart/form-data" style="display:none;">
+            <input type="file" id="image" onchange=" handle_files(this.files); " name="file" style="filter:alpha(opacity=0); opacity:0; width:30px; display:none;" />
+            <button id="upload_btn" type="button" style='display:none;'>Upload</button>
+        </form>
+
+        <div id="result">
+            <div id="result_text"><h3>result:</h3></div>
+            <div id="show_result"></div>
+            <div>
+
+                <div id="below"></div>
+
+
+                <!-- Footer -->
+
+                <footer id="footer">
+                    <ul class="icons">
+                        <!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
+                        <!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
+                        <li><a href="https://github.com/ladrift/what_pic" class="icon fa-github"><span class="label">GitHub</span></a></li>
+                        <li><a href="" class="icon fa-wechat"><span class="label">wechat</span></a></li>
+                    </ul>
+                    <!-- <ul class="copyright">
+                        <li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
+                        </ul> -->
+                </footer>
+                <!-- Scripts -->
+                <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+                <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='myjs.js') }}"></script>
+                <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='ajax_url.js') }}"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='ajax_upload.js') }}"></script>
+                <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+                <script type="text/javascript">
+                    var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+                </script>
+
+    </body>
+</html>

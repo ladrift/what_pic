@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}What the Pic is{% endblock %}
+
+{% block page_content %}
+<div id="the_all">
+	<div id="left_div">
+		<p> <span>功</span>能：你在url框内输入一张图片在网络上的地址，以类似.jpg.png等结尾的地址。<p>
+		<p>例如：http://a.
+			hiphotos.baidu
+			.com/baike/
+			c0%3Dbaike116%2C
+			5%2C5%2C11
+			6%2C38/
+		sign=5db91b1ad73
+		9b60059c307e5883
+		95e4f/77094b36ac
+		af2eddebbb51108f1
+		001e938019384<em>.jpg</em>
+         （额，这是楪祈的照片。）</p>
+          <p>放进去点击submit就可以在result后得到对于图片内容的陈述.</p>
+          <p>当然现在的0.1版本只能上传图片地址，不过会很快迭代更新(*/ω＼*)</p>
+	</div>
+	<div id="right_div">
+		<img src="{{ url_for('static', filename='business_card.png') }}" id="card">
+        <form id=uploadform method=post enctype=multipart/form-data>
+            <input id=image type="file" name=file onchange=" handle_files(this.files); ">
+            <button id="upload" type="button">Upload</button>
+        </form>
+      <div class="form-group   required">
+          <label class="control-label" for="url">Please input URL for pictures</label>
+          <input id="url" required type="text">
+      </div>
+      <input id="submit" class="btn btn-default" type="submit" name="submit" value="Submit">
+	    <br>
+    <div id="result_all">
+	    <div id="result_text">Result:</div>
+      <br>
+      <br>
+	    <div id="result"></div>
+    </div>
+	</div>
+	<div id="thumbnail"><img id="img_thumbnail" src=""/></div>
+</div>
+{% endblock %}

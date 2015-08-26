@@ -1,9 +1,9 @@
 function file_upload() {
-    $('#upload').click(function() {
+    $('#upload_btn').click(function() {
         console.log('upload click')
         event.preventDefault();
         var form_data = new FormData($('#uploadform')[0]);
-        $('#result').text('processing...')
+        $('#show_result').text('processing...')
         $.ajax({
             type: 'POST',
             url: '/upload',
@@ -17,9 +17,9 @@ function file_upload() {
             console.log(jqXHR);
             console.log('Success!');
             if (data['type'] == 'result') {
-                $("#result").text(data['content']);
+                $("#show_result").text(data['content']);
             } else if (data['type'] == 'mistake') {
-                $("#result").text('Mistake happened');
+                $("#show_result").text('Mistake happened');
             }
         }).fail(function(data){
             alert('error!');
@@ -36,7 +36,18 @@ function previewImage(file) {
         return;
     }
 
-    console.log('is image')
+    console.log('is image');
+    var picture=document.createElement("img");
+    var max_width = window.getComputedStyle(get_id).width;
+    var max_height = window.getComputedStyle(get_id).width;
+    var num_mwidth = max_width.replace(/[^0-9]/ig, "") * 0.9;
+    var num_mheight = max_height.replace(/[^0-9]/ig, "") * 0.9;
+
+    picture.setAttribute("style","max-height:"+num_mheight+"px; max-width:"+num_mwidth+"px;");
+    picture.setAttribute("id","img_thumbnail");
+    picture.setAttribute("src","");
+    document.getElementById('upload').appendChild(picture);
+
     $('#img_thumbnail')[0].file = file;
 
     var reader = new FileReader();
@@ -45,9 +56,18 @@ function previewImage(file) {
 }
 
 function handle_files(files) {
-    // trigger submit button
+    document.getElementById('word').style.display="none";
+    document.getElementById('add_url').style.display="none";
+    document.getElementById('arrow').style.display="none";
+    document.getElementById('upload').style.padding="0px";
 
-    previewImage(files[0])
+    previewImage(files[0]);
+
+    // trigger submit button to upload the file
+    upload_btn = document.getElementById('upload_btn');
+    upload_btn.click();
 }
     
-
+function debug_upload_file(e) {
+    console.log(e);
+}
