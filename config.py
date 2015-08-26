@@ -4,6 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     # some global configure variables
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    UPLOAD_FOLDER = os.path.join(basedir, 'what_pic/static/uploads')
 
 
     @staticmethod

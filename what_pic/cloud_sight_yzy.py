@@ -9,7 +9,7 @@ import re
 import requests
 
 class CloudImage:
-    def __init__(self, url=None, locale='zh-CN', lang='zh-CN'):
+    def __init__(self, url=None, file=None, locale='zh-CN', lang='zh-CN'):
         self.req_url = 'https://api.cloudsightapi.com/image_requests/'
         self.resp_url = 'https://api.cloudsightapi.com/image_responses/'
         self.locale = locale
@@ -28,6 +28,31 @@ class CloudImage:
 
         if url:
             self._url(url)
+        elif file:
+            self._file(file)
+        else:
+            print('Cloud Image init failed.')
+            self = None
+
+    def _file(self, file):
+        """using a file of locale image to initiate.
+        """
+        self.data = {
+                'image_request[locale]': self.locale,
+                'image_request[language]': self.lang,
+                }
+        self.files = {
+                'image_request[image]': file
+                }
+        print('Uploading...')
+        resp = self.session.post(self.req_url, \
+                data=self.data, files=self.files)
+
+        self._token = resp.json().get('token')
+        if self._token:
+            self.upload_ok = True
+        else:
+            print('Upload failed.')
 
     def _url(self, url):
         """using url of image to to initiate.
@@ -36,10 +61,10 @@ class CloudImage:
             url: a string of url
         """
         self.data = {
-        'image_request[remote_image_url]': url,
-        'image_request[locale]': self.locale,
-        'image_request[language]': self.lang,
-        }
+                'image_request[remote_image_url]': url,
+                'image_request[locale]': self.locale,
+                'image_request[language]': self.lang,
+                }
 
         #try:
         print('Uploading...')
@@ -48,7 +73,10 @@ class CloudImage:
         #    raise ConnectionError('can not upload image.')
 
         self._token = resp.json().get('token')
-        self.upload_ok = True
+        if self._token:
+            self.upload_ok = True
+        else:
+            print('Upload failed.')
 
     def _result(self):
         """Return the result or None when _token is None
@@ -71,11 +99,13 @@ class CloudImage:
                 if result.get('status') == 'completed':
                     return result.get('description')
                 else:
+                    print('Not completed')
                     time.sleep(2)
+            else:
+                return None
 
 def main():
-    url = input('URL:')
-    cloud_img = CloudImage(url=url)
+    cloud_img = CloudImage(file=open('link.jpeg', 'rb'))
     if cloud_img:
         #count = 50
         #while count > 0:
@@ -93,6 +123,9 @@ def main():
         print(cloud_img.result())
     else:
         print('cloud_img is None')
+
+    #if CloudImage():
+    #    print('pass')
 
 
 if __name__ == '__main__':

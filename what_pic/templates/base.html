@@ -37,6 +37,15 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='myjs.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='ws.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='ajax_url.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='ajax_upload.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript">
+  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
 {% endblock %}

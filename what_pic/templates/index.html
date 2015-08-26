@@ -24,11 +24,15 @@
 	</div>
 	<div id="right_div">
 		<img src="{{ url_for('static', filename='business_card.png') }}" id="card">
+        <form id=uploadform method=post enctype=multipart/form-data>
+            <input id=image type="file" name=file onchange=" handle_files(this.files); ">
+            <button id="upload" type="button">Upload</button>
+        </form>
       <div class="form-group   required">
           <label class="control-label" for="url">Please input URL for pictures</label>
-          <input id="url"required type="text">
+          <input id="url" required type="text">
       </div>
-      <input id="submit" class="btn btn-default" type="submit" name="submit" value="Submit" onclick="show_pic()">
+      <input id="submit" class="btn btn-default" type="submit" name="submit" value="Submit">
 	    <br>
     <div id="result_all">
 	    <div id="result_text">Result:</div>
