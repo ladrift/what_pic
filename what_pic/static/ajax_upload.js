@@ -41,6 +41,11 @@ function previewImage(file) {
     }
 
     console.log('is image');
+    // remove previous
+    if (document.contains(document.getElementById('img_thumbnail'))) {
+        document.getElementById('img_thumbnail').remove();
+    }
+    // add image
     var picture=document.createElement("img");
     var max_width = window.getComputedStyle(get_id).width;
     var max_height = window.getComputedStyle(get_id).width;
