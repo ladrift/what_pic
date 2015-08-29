@@ -1,11 +1,12 @@
 function file_upload() {
     $('#upload_btn').click(function() {
         console.log('upload click');
-        // disable the input button
-        $('input#submit_url').prop('disabled', true)
         event.preventDefault();
         var form_data = new FormData($('#uploadform')[0]);
-        $('#show_result').text('processing...')
+        // disable the input button
+        $('input#submit_url').prop('disabled', true);
+        $('input#image').prop('disabled', true);
+        $('#show_result').text('processing...');
         $.ajax({
             type: 'POST',
             url: '/upload',
@@ -19,7 +20,8 @@ function file_upload() {
             console.log(jqXHR);
             console.log('Success!');
             // enable the button
-            $('input#submit_url').prop('disabled', false)
+            $('input#submit_url').prop('disabled', false);
+            $('input#image').prop('disabled', false);
             if (data['type'] == 'result') {
                 $("#show_result").text(data['content']);
             } else if (data['type'] == 'mistake') {

@@ -2,6 +2,7 @@ function url_submit() {
     $('#submit_url').click(function() {
         // disable the button
         $('input#submit_url').prop('disabled', true)
+        $('input#image').prop('disabled', true)
         event.preventDefault();
         
         // clean words
@@ -34,7 +35,10 @@ function url_submit() {
             }, function(data) {
                 console.log(data);
                 // enable the button
-                $('input#submit_url').prop('disabled', false)
+                $('input#submit_url').prop('disabled', false);
+                $('input#image').prop('disabled', false);
+                // clean the input text
+                $('input#the_url').val('');
                 if (data.type == 'mistake') {
                     $('#show_result').text('mistake happened');
                 } else if (data.type == 'result') {
