@@ -1,6 +1,8 @@
 function file_upload() {
     $('#upload_btn').click(function() {
-        console.log('upload click')
+        console.log('upload click');
+        // disable the input button
+        $('input#submit_url').prop('disabled', true)
         event.preventDefault();
         var form_data = new FormData($('#uploadform')[0]);
         $('#show_result').text('processing...')
@@ -16,6 +18,8 @@ function file_upload() {
             console.log(textStatus);
             console.log(jqXHR);
             console.log('Success!');
+            // enable the button
+            $('input#submit_url').prop('disabled', false)
             if (data['type'] == 'result') {
                 $("#show_result").text(data['content']);
             } else if (data['type'] == 'mistake') {

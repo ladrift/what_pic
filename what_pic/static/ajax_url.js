@@ -1,5 +1,7 @@
 function url_submit() {
     $('#submit_url').click(function() {
+        // disable the button
+        $('input#submit_url').prop('disabled', true)
         event.preventDefault();
         
         // clean words
@@ -26,6 +28,8 @@ function url_submit() {
                 content: $('input#the_url').val()
             }, function(data) {
                 console.log(data);
+                // enable the button
+                $('input#submit_url').prop('disabled', false)
                 if (data.type == 'mistake') {
                     $('#show_result').text('mistake happened');
                 } else if (data.type == 'result') {
