@@ -5,7 +5,6 @@ from flask import render_template, session, url_for, \
 from werkzeug import secure_filename
 
 from . import main
-from .forms import ImageUrlForm
 from ..cloud_sight_yzy import CloudImage
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
