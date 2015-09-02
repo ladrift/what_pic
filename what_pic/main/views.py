@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from flask import render_template, session, url_for, \
         current_app, redirect, send_from_directory, \
