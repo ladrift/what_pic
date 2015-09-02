@@ -33,7 +33,7 @@ def upload():
             if cloud_img:
                 result = cloud_img.result()
                 if result:
-                    print('result is', result)
+                    print('result is', result.decode('utf-8'))
                     return jsonify(type='result', content=result)
                 else:
                     print('result is None')
