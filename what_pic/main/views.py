@@ -22,7 +22,7 @@ def index():
 def upload():
     if request.method == 'POST':
         file_val = request.files['file']
-        print('filename:', file_val.filename)
+        # print('filename:', file_val.filename)
         if file_val and allowed_file(file_val.filename):
             filename = secure_filename(file_val.filename)
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
@@ -33,7 +33,7 @@ def upload():
             if cloud_img:
                 result = cloud_img.result()
                 if result:
-                    print('result is', result.encode('utf-8'))
+                    # print('result is', result.encode('utf-8'))
                     return jsonify(type='result', content=result)
                 else:
                     print('result is None')
