@@ -4,6 +4,7 @@ from flask import render_template, session, url_for, \
         current_app, redirect, send_from_directory, \
         request, jsonify
 from werkzeug import secure_filename
+import pinyin
 
 from . import main
 from ..cloud_sight_yzy import CloudImage
@@ -30,7 +31,8 @@ def upload():
         file_val = request.files['file']
         # print('filename:', file_val.filename)
         if file_val and allowed_file(file_val.filename):
-            filename = secure_filename(file_val.filename)
+            ascii_name = pinyin.get(file_val.filename)
+            filename = secure_filename(ascii_name)
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file_val.save(file_path)
 
@@ -40,6 +42,10 @@ def upload():
             except:
                 return jsonify(type='mistake', content=None)
 
+            try:
+                os.remove(file_path)
+            except:
+                print('Remove failed. file not found.')
             if cloud_img:
                 result = cloud_img.result()
                 if result:

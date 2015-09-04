@@ -27,12 +27,13 @@ class CloudImage:
         self.session.headers.update(self.headers)
 
         if url:
-            self._url(url)
+            valid = self._url(url)
         elif file:
-            self._file(file)
+            valid = self._file(file)
         else:
             print('Cloud Image init failed.')
             self = None
+
 
     def _file(self, file):
         """using a file of locale image to initiate.
@@ -48,11 +49,13 @@ class CloudImage:
         resp = self.session.post(self.req_url, \
                 data=self.data, files=self.files)
 
+        print(resp.json())
         self._token = resp.json().get('token')
         if self._token:
             self.upload_ok = True
+            return True
         else:
-            print('Upload failed.')
+            return resp.json()['errors']
 
     def _url(self, url):
         """using url of image to to initiate.
@@ -72,11 +75,14 @@ class CloudImage:
         #except Exception:
         #    raise ConnectionError('can not upload image.')
 
+        print(resp.json())
         self._token = resp.json().get('token')
         if self._token:
             self.upload_ok = True
+            return True
         else:
             print('Upload failed.')
+            return resp.json()['errors']
 
     def _result(self):
         """Return the result or None when _token is None
