@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block head %}
+{{ super() }}
+<title>About</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>About</h1>
+	<p><em>What the pic is</em> is a open-source project on <a href='https://github.com/ladrift/what_pic'  >Github</a>.</p>
+	<p>It’s a project launched in <a href='http://www.sicun.org/'  >Sicun Studio</a> and the idea is inspired by <a href='https://github.com/WangHong-yang'  >王洪阳</a>.</p>
+	<h2 >Contributors</h2>
+	<ul><li>王洪阳 <a class="fa fa-github" href='https://github.com/WangHong-yang'  ></a></li>
+		<li>刘韬 <a class="fa fa-github" href='https://github.com/feiyuhan'  ></a></li>
+		<li>杨翔宇<a class="fa fa-github" href='https://github.com/YNestA'  ></a></li>
+		<li>严子怡 <a class="fa fa-github" href='https://github.com/ladrift'  ></a></li>
+	</ul>
+</div>
+{% endblock %}

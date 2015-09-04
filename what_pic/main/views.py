@@ -10,6 +10,9 @@ from ..cloud_sight_yzy import CloudImage
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
+LOCALE = 'en_US'
+LANG = 'en_US'
+
 def allowed_file(filename):
     return '.' in filename and \
             filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -17,6 +20,9 @@ def allowed_file(filename):
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+@main.route('/about')
+def about():
+    return render_template('about.html')
 
 @main.route('/upload', methods = ['POST'])
 def upload():
@@ -29,7 +35,11 @@ def upload():
             file_val.save(file_path)
 
             # cloud_sight 
-            cloud_img = CloudImage(file=open(file_path, 'rb'))
+            try:
+                cloud_img = CloudImage(file=open(file_path, 'rb'), locale=LOCALE, lang=LANG)
+            except:
+                return jsonify(type='mistake', content=None)
+
             if cloud_img:
                 result = cloud_img.result()
                 if result:
@@ -47,7 +57,7 @@ def url_submit():
     if request.args.get('type') == 'url':
         url = request.args.get('content')
         if url:
-            cloud_img = CloudImage(url=url)
+            cloud_img = CloudImage(url=url, locale=LOCALE, lang=LANG)
             if cloud_img:
                 result = cloud_img.result()
                 if result:

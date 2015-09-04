@@ -1,90 +1,77 @@
-<!DOCTYPE HTML>
-<!--
-    Eventually by HTML5 UP
-    html5up.net | @n33co
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-    <head>
-        <title>What The Pic Is</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
-        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    </head>
-    <body>
+{% extends 'base.html' %}
 
-        <img src="{{ url_for('static', filename='business_card.png') }}" id="card">
-        <!-- Header -->
-        <header id="header">
-            <h1>How to Play</h1>
-            <p>You can UPLOAD your picture or submit the url which is end with .jpg .jpeg .png and etc,then we will tell the picture and tell you what the picture is.</p>
-            <p>You have two ways:</p>
-            <ul>
-                <li>upload your own picture in your own file</li>
-                <li>submit the <em>url</em> of the picture which on the Internet</li>
-            </ul>
-            <ul id="ps_alert">※&nbsp &nbsp Ps:we will NOT keep your photo.</ul>
-        </header>
+{% block title %}What the Pic is?{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Recognize <br> what in your picture</h1>
+			<h3>HOW-TO:</h3>
+			<ul>
+				<li>upload your own picture in your own file</li>
+				OR
+				<li>submit the <em>url</em> of the picture which on the Internet</li>
+			</ul>
+			※ <strong>PS</strong>: we will <strong>NOT </strong>keep your photo.
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<!-- Upload form -->
+			<div class="panel panel-default">
+				<div class="panel-body" style="height:300px; cursor:pointer;" id="upload" onclick="image.click()">
+					<p id="panel-text">
+						<strong>Click here to upload image</strong>
+						<br>
+						or enter a URL below and click submit
+					</p>
+				</div>
+			</div>
+			<form id=uploadform method="post" enctype="multipart/form-data" style="display:none;">
+				<input type="file" id="image" onchange=" handle_files(this.files); " name="file" style="filter:alpha(opacity=0); opacity:0; width:30px; display:none;" />
+				<button id="upload_btn" type="button" style='display:none;'>Upload</button>
+			</form>
+			<!-- URL form -->
+			<form action="" method="POST" role="form" class="form-horizontal">
+				<div class="col-md-9">
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-link"></span>
+							</div>
+							<input id="the_url" type="text" class="form-control" id="url" placeholder="Input image URL here">
+						</div>
+					</div>
+				</div>
 
-        <div id="upload" onclick="image.click()" style="cursor:pointer">
-            <p id="word">
-            <strong id="click_here">Click Here</strong>
-            <p id="add_url">
-            or add URL below
-            </p>
-            <p id="arrow">↓↓↓↓</p>
-            </p>
-        </div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<button id="submit_url" type="submit" class="btn btn-success col-xs-12 col-md-10 col-md-offset-1">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
 
-        <!-- Signup Form -->
-        <form id="signup-form" method="post" action="#">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Result</h3>
+				</div>
+				<div class="panel-body" id="show_result">
 
-            <input type="text" name="sub_url" id="the_url" placeholder="Add URL" />
-            <input type="submit" value="Submit" id="submit_url" />
-
-        </form>
-        <form id=uploadform method="post" enctype="multipart/form-data" style="display:none;">
-            <input type="file" id="image" onchange=" handle_files(this.files); " name="file" style="filter:alpha(opacity=0); opacity:0; width:30px; display:none;" />
-            <button id="upload_btn" type="button" style='display:none;'>Upload</button>
-        </form>
-
-        <div id="result">
-            <div id="result_text"><h3>result:</h3></div>
-            <div id="show_result"></div>
-            <div>
-
-                <div id="below"></div>
-
-
-                <!-- Footer -->
-
-                <footer id="footer">
-                    <ul class="icons">
-                        <!-- <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li> -->
-                        <!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
-                        <li><a href="https://github.com/ladrift/what_pic" class="icon fa-github"><span class="label">GitHub</span></a></li>
-                        <li><a href="" class="icon fa-wechat"><span class="label">wechat</span></a></li>
-                    </ul>
-                    <!-- <ul class="copyright">
-                        <li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
-                        </ul> -->
-                </footer>
-                <!-- Scripts -->
-                <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-                <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-                <script type="text/javascript" src="{{ url_for('static', filename='myjs.js') }}"></script>
-                <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-                <script type="text/javascript" src="{{ url_for('static', filename='ajax_url.js') }}"></script>
-                <script type="text/javascript" src="{{ url_for('static', filename='ajax_upload.js') }}"></script>
-                <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
-                <script type="text/javascript">
-                    var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-                </script>
-
-    </body>
-</html>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+	</div>
+</div>
+<footer class="footer">
+	<div class="container">
+		<a class="navbar-brand visible-xs" href="#">
+			<img alt="Brand" class="" src="{{ url_for('static', filename='images/brand_sicun_chinese.png') }}">
+		</a>
+		<p class="text-muted">© 2015 Sicun Studio · Powered by Bootstrap, Cloud Sight, Flask</p>
+	</div>
+</footer>
+{% endblock %}

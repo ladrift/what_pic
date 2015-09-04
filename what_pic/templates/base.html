@@ -1,51 +1,57 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}What the Pic is{% endblock %}
-
 {% block head %}
 {{ super() }}
-<link rel="short icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="stylesheet" href="{{ url_for('static', filename='mycss.css') }}" media="screen" title="no title" charset="utf-8">
+<link rel="short icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only"Toggle navigation></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="navbar-brand" href="{{ url_for('main.index') }}">What the Pic is</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li><a href="{{ url_for('main.index') }}">Home</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hamburger-navigation">
+				<span class="sr-only">Navigation Toggle</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand hidden-xs" href="http://www.sicun.org/">
+				<img alt="Brand" src="{{ url_for('static', filename='images/brand_sicun.png') }}">
+			</a>
+			<a href="{{ url_for('.index') }}" class="navbar-brand">What the Pic is?</a>
+		</div>
+		<div class="collapse navbar-collapse" id="hamburger-navigation">
+			<div class="navbar-text">
+				Coding with <span class="glyphicon glyphicon-heart"></span> by <a class=navbar-link href="http://www.sicun.org/">Sicun Studio</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right" role="menu">
+				<li><a href="http://mp.weixin.qq.com/s?__biz=MzIxMjA1MzUxNw==&mid=210811553&idx=1&sn=904ca4479a7bfaa57fcc24d9dd4a55c8&scene=4#wechat_redirect">About Us</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" role="button" data-toggle="dropdown">More <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ url_for('.about') }}">About this project</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
 {% endblock %}
 
-{% block content %}
-<div class="container">
-  {% block page_content %}{% endblock %}
-</div>
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}
 
 {% block scripts %}
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="{{ url_for('static',filename='myjs.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='ws.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='ajax_url.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='ajax_upload.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+{{ super() }}
+<!--script type="text/javascript" src="{{ url_for('static', filename='js/myjs.js') }}"></script-->
+<script type="text/javascript" src="{{ url_for('static', filename='js/ajax_url.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/ajax_upload.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 <script type="text/javascript">
-  var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
-
 {% endblock %}
