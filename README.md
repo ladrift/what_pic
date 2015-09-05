@@ -12,14 +12,6 @@ I sugguest using [virtualenv](https://github.com/pypa/virtualenv) to install the
 
 ## Usage
 
-In `ws_server` directory,
-
-``` bash
-python ws_server.py
-```
-
-to start a [WebSocket](https://zh.wikipedia.org/wiki/WebSocket) server using [autobahn](http://autobahn.ws/python/index.html) at `localhost:9000`
-
 In the root of the project,
 
 ``` shell
