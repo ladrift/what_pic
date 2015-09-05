@@ -28,7 +28,10 @@ function file_upload() {
                 $("#show_result").text('Mistake happened');
             }
         }).fail(function(data){
-            alert('error!');
+            // enable the button
+            $('button#submit_url').prop('disabled', false);
+            $('input#image').prop('disabled', false);
+            $('#show_result').text('Request fail')
         });
     });
 }

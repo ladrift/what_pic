@@ -15,6 +15,7 @@ function url_submit() {
                 document.getElementById('img_thumbnail').remove();
             }
             // add image
+            $('div#upload.panel-body')[0].style["padding-top"] = "15px";
             var get_id=document.getElementById('the_url');
             var get_id2=document.getElementById('submit_url');
             var picture=document.createElement("img");
