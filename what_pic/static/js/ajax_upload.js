@@ -1,38 +1,57 @@
+ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'bmp']
+function contains(a, obj) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function validate_image(file_name) {
+    return contains(ALLOWED_EXTENSIONS, file_name.split('.')[1]);
+}
+
 function file_upload() {
     $('#upload_btn').click(function() {
         console.log('upload click');
         event.preventDefault();
-        var form_data = new FormData($('#uploadform')[0]);
-        // disable the input button
-        $('button#submit_url').prop('disabled', true);
-        $('input#image').prop('disabled', true);
-        $('#show_result').text('processing...');
-        $.ajax({
-            type: 'POST',
-            url: '/upload',
-            data: form_data,
-            contentType: false,
-            processData: false,
-            dataType: 'json'
-        }).done(function(data, textStatus, jqXHR){
-            console.log(data);
-            console.log(textStatus);
-            console.log(jqXHR);
-            console.log('Success!');
-            // enable the button
-            $('button#submit_url').prop('disabled', false);
-            $('input#image').prop('disabled', false);
-            if (data['type'] == 'result') {
-                $("#show_result").text(data['content']);
-            } else if (data['type'] == 'mistake') {
-                $("#show_result").text('Mistake happened');
-            }
-        }).fail(function(data){
-            // enable the button
-            $('button#submit_url').prop('disabled', false);
-            $('input#image').prop('disabled', false);
-            $('#show_result').text('Request fail')
-        });
+        var file = $('input#image')[0].files[0];
+        if (validate_image(file.name)) {
+            var form_data = new FormData($('#uploadform')[0]);
+            // disable the input button
+            $('button#submit_url').prop('disabled', true);
+            $('input#image').prop('disabled', true);
+            $('#show_result').text('processing...');
+            $.ajax({
+                type: 'POST',
+                url: '/upload',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                dataType: 'json'
+            }).done(function(data, textStatus, jqXHR){
+                console.log(data);
+                console.log(textStatus);
+                console.log(jqXHR);
+                console.log('Success!');
+                // enable the button
+                $('button#submit_url').prop('disabled', false);
+                $('input#image').prop('disabled', false);
+                if (data['type'] == 'result') {
+                    $("#show_result").text(data['content']);
+                } else if (data['type'] == 'mistake') {
+                    $("#show_result").text('Mistake happened');
+                }
+            }).fail(function(data){
+                // enable the button
+                $('button#submit_url').prop('disabled', false);
+                $('input#image').prop('disabled', false);
+                $('#show_result').text('Request fail')
+            });
+        } else {
+            alert('Please input image files with .jpg .jpeg .png .gif .bmp extensions');
+        }
     });
 }
 
@@ -42,7 +61,7 @@ function previewImage(file) {
 
     if (!imageType.test(file.type)) {
         console.log('not image')
-        return;
+            return;
     }
 
     console.log('is image');
@@ -82,7 +101,7 @@ function handle_files(files) {
     upload_btn = document.getElementById('upload_btn');
     upload_btn.click();
 }
-    
+
 function debug_upload_file(e) {
     console.log(e);
 }
